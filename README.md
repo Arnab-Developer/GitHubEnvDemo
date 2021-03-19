@@ -7,7 +7,7 @@ There are two environments in this repo.
 - Dev
 - Prd
 
-CI CD rules used for this app.
+CI CD workflow used for this app.
 
 - For pull request to `main` only build.
 - When pull request merged to `main` then build and deploy to `Dev` environment.
