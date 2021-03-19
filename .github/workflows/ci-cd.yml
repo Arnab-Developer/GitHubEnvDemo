@@ -1,11 +1,9 @@
 name: CI CD
-
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,3 +17,45 @@ jobs:
         dotnet-version: 5.0.101    
     - name: Build
       run: dotnet build --configuration Release
+  dev-deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to dev
+    needs: build
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101
+    - name: Build
+      run: dotnet build --configuration Release
+    - name: Publish
+      run: dotnet publish GitHubEnvDemo.Web\GitHubEnvDemo.Web.csproj --configuration Release -o GitHubEnvDemo.Web\bin\publish
+    - name: Deploy to azure
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: env-demo-dev.azurewebsites.net
+        publish-profile: ${{ secrets.DEV_PUBLISH_PROFILE }}
+        package: GitHubEnvDemo.Web\bin\publish
+  prd-deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to prd
+    needs: build
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101
+    - name: Build
+      run: dotnet build --configuration Release
+    - name: Publish
+      run: dotnet publish GitHubEnvDemo.Web\GitHubEnvDemo.Web.csproj --configuration Release -o GitHubEnvDemo.Web\bin\publish
+    - name: Deploy to azure
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: env-demo-prd.azurewebsites.net
+        publish-profile: ${{ secrets.PRD_PUBLISH_PROFILE }}
+        package: GitHubEnvDemo.Web\bin\publish
