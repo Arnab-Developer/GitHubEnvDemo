@@ -1,3 +1,5 @@
+# GitHub environment demo
+
 This is a demo app to show CI CD with GitHub action and environment.
 
 There are two environments created in this repo. 
