@@ -34,7 +34,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release
     - name: Publish
-      run: dotnet publish '\GitHubEnvDemo.Web\GitHubEnvDemo.Web.csproj' --configuration Release -o '\GitHubEnvDemo.Web\bin\publish'
+      run: dotnet publish 'GitHubEnvDemo.Web\GitHubEnvDemo.Web.csproj' --configuration Release -o '\GitHubEnvDemo.Web\bin\publish'
     - name: Deploy to azure
       uses: azure/webapps-deploy@v2
       with:
@@ -58,7 +58,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release
     - name: Publish
-      run: dotnet publish '\GitHubEnvDemo.Web\GitHubEnvDemo.Web.csproj' --configuration Release -o '\GitHubEnvDemo.Web\bin\publish'
+      run: dotnet publish 'GitHubEnvDemo.Web\GitHubEnvDemo.Web.csproj' --configuration Release -o '\GitHubEnvDemo.Web\bin\publish'
     - name: Deploy to azure
       uses: azure/webapps-deploy@v2
       with:
