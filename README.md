@@ -10,7 +10,7 @@ There are two environments in this repo.
 CI CD workflow used for this app.
 
 - For pull request to `main` only build.
-- When pull request merged to `main` then build and deploy to `Dev` environment.
+- When pull request merged in `main` then build and deploy to `Dev` environment.
 - When a release has been created then deploy to `Prd` environment.
 
 Deployment to `Prd` needs approval.
